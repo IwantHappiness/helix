@@ -29,7 +29,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="custom-a1acbc99.css">
+        <link rel="stylesheet" href="custom-10faeed5.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "colibri";
             const default_dark_theme = "colibri";
-            window.path_to_searchindex_js = "searchindex-1e3bba83.js";
+            window.path_to_searchindex_js = "searchindex-b55beadb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-c2fa7ea4.js"></script>
@@ -181,8 +181,17 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="helix"><a class="header" href="#helix">Helix</a></h1>
-<p>Docs for bleeding edge master can be found at
-<a href="https://docs.helix-editor.com/master">https://docs.helix-editor.com/master</a>.</p>
+<div class="version-tiles">
+  <a class="version-tile" href="/">
+    <strong>Stable</strong>
+    <span class="version-tile-sub">Documentation for the latest tagged release.</span>
+  </a>
+  <a class="version-tile" href="/master">
+    <strong>Latest (master)</strong>
+    <span class="version-tile-sub">Bleeding-edge docs built from the <code>master</code> branch.</span>
+  </a>
+</div>
+
 <p>See the <a href="#using-helix">usage</a> section for a quick overview of the editor, <a href="#keymap-1">keymap</a>
 section for all available keybindings and the <a href="#configuration-2">configuration</a> section
 for defining custom keybindings, setting themes, etc.
@@ -2702,6 +2711,7 @@ Its settings will be merged with the configuration directory and the built-in co
 <li><a href="#editorguttersdiagnostics-section"><code>[editor.gutters.diagnostics]</code> Section</a></li>
 <li><a href="#editorguttersdiff-section"><code>[editor.gutters.diff]</code> Section</a></li>
 <li><a href="#editorguttersspacer-section"><code>[editor.gutters.spacer]</code> Section</a></li>
+<li><a href="#editorgutterscode-action-hint-section"><code>[editor.gutters.code-action-hint]</code> Section</a></li>
 </ul>
 </li>
 <li><a href="#editorsoft-wrap-section"><code>[editor.soft-wrap]</code> Section</a></li>
@@ -2728,7 +2738,7 @@ Its settings will be merged with the configuration directory and the built-in co
 <tr><td><code>cursorline</code></td><td>Highlight all lines with a cursor</td><td><code>false</code></td></tr>
 <tr><td><code>cursorcolumn</code></td><td>Highlight all columns with a cursor</td><td><code>false</code></td></tr>
 <tr><td><code>continue-comments</code></td><td>if helix should automatically add a line comment token if you create a new line inside a comment.</td><td><code>true</code></td></tr>
-<tr><td><code>gutters</code></td><td>Gutters to display: Available are <code>diagnostics</code> and <code>diff</code> and <code>line-numbers</code> and <code>spacer</code>, note that <code>diagnostics</code> also includes other features like breakpoints, 1-width padding will be inserted if gutters is non-empty</td><td><code>["diagnostics", "spacer", "line-numbers", "spacer", "diff"]</code></td></tr>
+<tr><td><code>gutters</code></td><td>Gutters to display: Available are <code>diagnostics</code> and <code>diff</code> and <code>line-numbers</code> and <code>spacer</code> and <code>code-action-hint</code>, note that <code>diagnostics</code> also includes other features like breakpoints, 1-width padding will be inserted if gutters is non-empty</td><td><code>["diagnostics", "spacer", "line-numbers", "spacer", "diff"]</code></td></tr>
 <tr><td><code>auto-completion</code></td><td>Enable automatic pop up of auto-completion</td><td><code>true</code></td></tr>
 <tr><td><code>path-completion</code></td><td>Enable filepath completion. Show files and directories if an existing path at the cursor was recognized, either absolute or relative to the current opened document or current working directory (if the buffer is not yet saved). Defaults to true.</td><td><code>true</code></td></tr>
 <tr><td><code>auto-format</code></td><td>Enable automatic formatting on save<sup class="footnote-reference" id="fr-3-1"><a href="#footnote-3">1</a></sup></td><td><code>true</code></td></tr>
@@ -2841,6 +2851,7 @@ workspace-diagnostics = ["warning", "error"]
 <tr><td><code>spacer</code></td><td>Inserts a space between elements (multiple/contiguous spacers may be specified)</td></tr>
 <tr><td><code>version-control</code></td><td>The current branch name or detached commit hash of the opened workspace</td></tr>
 <tr><td><code>register</code></td><td>The current selected register</td></tr>
+<tr><td><code>code-action-hint</code></td><td>Indicator for when code actions are available</td></tr>
 </tbody>
 </table>
 </div>
@@ -3113,6 +3124,9 @@ These colors are controlled by the theme attributes <code>diff.plus</code>, <cod
 <p>There are currently no options for this section.</p>
 <h4 id="editorguttersspacer-section"><a class="header" href="#editorguttersspacer-section"><code>[editor.gutters.spacer]</code> Section</a></h4>
 <p>Currently unused</p>
+<h4 id="editorgutterscode-action-hint-section"><a class="header" href="#editorgutterscode-action-hint-section"><code>[editor.gutters.code-action-hint]</code> Section</a></h4>
+<p>The <code>code-action-hint</code> gutter option displays an indicator for whether a code action is available at current selection.</p>
+<p>There are currently no options for this section.</p>
 <h3 id="editorsoft-wrap-section"><a class="header" href="#editorsoft-wrap-section"><code>[editor.soft-wrap]</code> Section</a></h3>
 <p>Options for soft wrapping lines that exceed the view width:</p>
 <div class="table-wrapper">
@@ -3924,6 +3938,7 @@ language-servers = [ "mylang-lsp" ]
 <tr><td><code>workspace-lsp-roots</code></td><td>Directories (relative to the workspace root) that stop the upward root search early. Meant for project-specific hard overrides in a local <code>.helix/config.toml</code>;</td></tr>
 <tr><td><code>persistent-diagnostic-sources</code></td><td>An array of LSP diagnostic sources assumed unchanged when the language server resends the same set of diagnostics. Helix can track the position for these diagnostics internally instead. Useful for diagnostics that are recomputed on save.</td></tr>
 <tr><td><code>rainbow-brackets</code></td><td>Overrides the <code>editor.rainbow-brackets</code> config key for the language</td></tr>
+<tr><td><code>code-actions-on-save</code></td><td>List of LSP code actions to be run in order on save, for example <code>["source.organizeImports"]</code></td></tr>
 </tbody>
 </table>
 </div>
@@ -3980,6 +3995,25 @@ config matches files like <code>Cargo.toml</code> or <code>languages.toml</code>
 of the formatter command. In particular, the <code>%{buffer_name}</code> variable can be passed as
 argument to the formatter:</p>
 <pre><code class="language-toml">formatter = { command = "mylang-formatter" , args = ["--stdin", "--stdin-filename", "%{buffer_name}"] }
+</code></pre>
+<h3 id="configuring-code-actions-on-save"><a class="header" href="#configuring-code-actions-on-save">Configuring code actions on save</a></h3>
+<p>The <code>code-actions-on-save</code> key lists LSP code actions to run (in order) when
+the buffer is saved. The available actions depend on available language servers,
+below are common examples and may need adjusting for your setup.</p>
+<pre><code class="language-toml"># Python with ruff
+[[language]]
+name = "python"
+code-actions-on-save = ["source.organizeImports", "source.fixAll"]
+
+# TS/JS with tsserver
+[[language]]
+name = "typescript"
+code-actions-on-save = ["source.addMissingImports.ts"]
+
+# TS/JS with eslint
+[[language]]
+name = "javascript"
+code-actions-on-save = ["source.fixAll.eslint", "source.organizeImports"]
 </code></pre>
 <h2 id="language-server-configuration"><a class="header" href="#language-server-configuration">Language Server configuration</a></h2>
 <p>Language servers are configured separately in the table <code>language-server</code> in the same file as the languages <code>languages.toml</code></p>
@@ -5023,6 +5057,7 @@ languages. It is only necessary when the node that increments the nesting level
 
         <!-- Custom JS scripts -->
         <script src="ts-query-56018970.js"></script>
+        <script src="version-3313557a.js"></script>
 
         <script src="book-c22b7243.js"></script>
 
